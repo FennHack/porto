@@ -1113,3 +1113,51 @@ footer {
 	opacity: 1;
 	transform: translateY(0);
 }
+
+/* LOGIN AREA */
+#authArea {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* TEXT LOGIN */
+#userInfo {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* BUTTON LOGIN */
+.nav-cta {
+    background: linear-gradient(135deg, #00ff88, #0099ff);
+    color: #0a0a0f;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,255,136,0.25);
+}
+
+/* HOVER */
+.nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,255,136,0.4);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    #authArea {
+        margin-top: 10px;
+    }
+
+    .nav-cta {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+}

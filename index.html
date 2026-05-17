@@ -372,5 +372,19 @@ https://templatemo.com/tm-615-amber-folio
     <script src="templatemo-amber-script.js"></script>
 
     <script src="login/js/welcome.js"></script>
+
+    <audio id="bgmusic" autoplay loop>
+  <source src="music/Aku Milikmu - Dewa 19.opus" type="audio/mpeg">
+</audio>
+
+<script>
+const music = document.getElementById("bgmusic");
+
+music.volume = 0.4;
+
+document.addEventListener("click", () => {
+    music.play();
+}, { once: true });
+</script>
 </body>
 </html>

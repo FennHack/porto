@@ -83,94 +83,65 @@
 
     <script>
     // ==================== REGISTER SCRIPT LENGKAP ====================
-    document.getElementById("registerForm").addEventListener("submit", async function(e) {
-        e.preventDefault();
+    <script>
+document.getElementById("registerForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-        const username = document.getElementById("username").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const confirmPassword = document.getElementById("confirmPassword").value.trim();
-        const messageEl = document.getElementById("message");
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const messageEl = document.getElementById("message");
 
-        // Reset pesan
-        messageEl.innerText = "";
-        messageEl.style.color = "";
+    messageEl.innerText = "";
+    messageEl.style.color = "";
 
-        // Validasi client-side
-        if (!username || !email || !password || !confirmPassword) {
-            messageEl.style.color = "red";
-            messageEl.innerText = "Semua field harus diisi!";
-            return;
-        }
-
-        if (password.length < 6) {
-            messageEl.style.color = "red";
-            messageEl.innerText = "Password minimal 6 karakter!";
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            messageEl.style.color = "red";
-            messageEl.innerText = "Konfirmasi password tidak cocok!";
-            return;
-        }
-
-        try {
-            const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded"
-                },
-                body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-            });
-
-            const data = await res.json();
-            console.log("Response API:", data);   // Untuk debugging
-
-            if (data.status === "success") {
-                messageEl.style.color = "green";
-                messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 2000);
-            } else {
-                messageEl.style.color = "red";
-                messageEl.innerText = data.message || "Gagal registrasi. Coba username lain.";
-            }
-        } catch (error) {
-            console.error("Error:", error);
-            messageEl.style.color = "red";
-            messageEl.innerText = "Koneksi bermasalah. Periksa internet Anda.";
-        }
-    });
-
-    // Password Toggle
-    const passwordToggle = document.getElementById('passwordToggle');
-    if (passwordToggle) {
-        passwordToggle.addEventListener('click', function() {
-            const passwordInput = document.getElementById('password');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-        });
+    if (!username || !email || !password || !confirmPassword) {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Semua field harus diisi!";
+        return;
     }
-    </script>
-</body>
-</html>        });
+    if (password.length < 6) {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Password minimal 6 karakter!";
+        return;
+    }
+    if (password !== confirmPassword) {
+        messageEl.style.color = "red";
+        messageEl.innerText = "Konfirmasi password tidak cocok!";
+        return;
+    }
+
+    try {
+        const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {   // ← Diubah ke fendra.my.id
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+        });
 
         const data = await res.json();
-        console.log("Response dari server:", data);   // ← ini penting
+        console.log("Response:", data);
 
         if (data.status === "success") {
             messageEl.style.color = "green";
-            messageEl.innerText = "Registrasi berhasil!";
-            setTimeout(() => window.location.href = "index.html", 1500);
+            messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
+            setTimeout(() => window.location.href = "index.html", 2000);
         } else {
             messageEl.style.color = "red";
-            messageEl.innerText = data.message || "Gagal registrasi";
+            messageEl.innerText = data.message || "Gagal registrasi. Coba username lain.";
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.error(error);
         messageEl.style.color = "red";
-        messageEl.innerText = "Koneksi gagal. Coba lagi atau cek internet.";
+        messageEl.innerText = "Koneksi gagal. Coba lagi.";
     }
 });
+
+// Password Toggle
+document.getElementById('passwordToggle').addEventListener('click', function() {
+    const pass = document.getElementById('password');
+    pass.type = pass.type === 'password' ? 'text' : 'password';
+});
+</script>

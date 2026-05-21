@@ -20,29 +20,59 @@ document.getElementById("registerForm").addEventListener("submit", async functio
     }
 
     try {
+
+        const bodyData =
+            `action=register` +
+            `&username=${encodeURIComponent(username)}` +
+            `&email=${encodeURIComponent(email)}` +
+            `&password=${encodeURIComponent(password)}`;
+
+        console.log(bodyData);
+
         const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            body: bodyData
         });
 
-        const data = await res.json();
+        const text = await res.text();
+
+        console.log("RAW RESPONSE:", text);
+
+        let data;
+
+        try {
+            data = JSON.parse(text);
+        } catch {
+            throw new Error("Response bukan JSON");
+        }
 
         if (data.status === "success") {
-            messageEl.style.color = "green";
-            messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
+
+            messageEl.style.color = "lime";
+            messageEl.innerText = "Registrasi berhasil!";
+
             setTimeout(() => {
-                window.location.href = "index.html"; // atau halaman login
+                window.location.href = "index.html";
             }, 1500);
+
         } else {
+
             messageEl.style.color = "red";
-            messageEl.innerText = data.message || "Gagal registrasi. Coba lagi.";
+            messageEl.innerText =
+                data.message || "Gagal registrasi.";
+
         }
+
     } catch (error) {
-        console.error(error);
+
+        console.error("ERROR:", error);
+
         messageEl.style.color = "red";
-        messageEl.innerText = "Terjadi kesalahan koneksi. Cek internet kamu.";
+        messageEl.innerText =
+            "Server error / response rusak.";
+
     }
 });

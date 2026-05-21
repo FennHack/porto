@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neon Minimalist Login Form</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style.css">
+    <title>Neon Minimalist Login</title>
+
+    <link rel="stylesheet" href="style.css" />
 
     <style>
         .alert-box{
@@ -17,235 +18,135 @@
             color:white;
             text-align:center;
             font-size:14px;
-            animation: fadeIn .3s ease;
-        }
-
-        @keyframes fadeIn{
-            from{
-                opacity:0;
-                transform:translateY(-5px);
-            }
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="login-container">
+<div class="login-container">
 
-        <div class="login-card">
+    <div class="login-card">
 
-            <div class="login-header">
-                <div class="logo-icon">⚡</div>
-                <h2>Sign In</h2>
-                <p>Access your account</p>
-            </div>
+        <div class="login-header">
+            <div class="logo-icon">⚡</div>
+            <h2>Sign In</h2>
+            <p>Access your account</p>
+        </div>
 
-            <form class="login-form" id="loginForm">
+        <form class="login-form" id="loginForm">
 
-                <!-- ALERT -->
-                <div id="alertBox" class="alert-box"></div>
+            <!-- ALERT -->
+            <div id="alertBox" class="alert-box"></div>
 
-                <!-- EMAIL -->
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            required
-                        >
-                        <label for="email">Email</label>
-                        <span class="input-line"></span>
-                    </div>
-                </div>
+            <!-- USERNAME -->
+            <div class="form-group">
+                <div class="input-wrapper">
 
-                <!-- PASSWORD -->
-                <div class="form-group">
-                    <div class="input-wrapper password-wrapper">
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                    />
 
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            required
-                        >
+                    <label for="username">Username</label>
 
-                        <label for="password">Password</label>
-
-                        <button 
-                            type="button" 
-                            class="password-toggle" 
-                            id="passwordToggle"
-                        >
-                            👁
-                        </button>
-
-                        <span class="input-line"></span>
-
-                    </div>
-                </div>
-
-                <!-- OPTIONS -->
-                <div class="form-options">
-
-                    <div class="remember-wrapper">
-                        <input type="checkbox" id="remember">
-
-                        <label for="remember" class="checkbox-label">
-                            Keep me signed in
-                        </label>
-                    </div>
-
-                    <a href="#" class="forgot-password">
-                        Forgot password?
-                    </a>
+                    <span class="input-line"></span>
 
                 </div>
-
-                <!-- BUTTON -->
-                <button type="submit" class="login-btn btn">
-                    <span class="btn-text">Sign In</span>
-                </button>
-
-            </form>
-
-            <!-- DIVIDER -->
-            <div class="divider">
-                <span>or</span>
             </div>
 
-            <!-- SOCIAL -->
-            <div class="social-login">
+            <!-- PASSWORD -->
+            <div class="form-group">
+                <div class="input-wrapper password-wrapper">
 
-                <button type="button" class="social-btn google-btn">
-                    <span>Continue with Google</span>
-                </button>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                    />
 
-                <button type="button" class="social-btn apple-btn">
-                    <span>Continue with Apple</span>
-                </button>
+                    <label for="password">Password</label>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="passwordToggle"
+                    >
+                        👁
+                    </button>
+
+                    <span class="input-line"></span>
+
+                </div>
+            </div>
+
+            <!-- OPTIONS -->
+            <div class="form-options">
+
+                <div class="remember-wrapper">
+                    <input type="checkbox" id="remember">
+
+                    <label for="remember" class="checkbox-label">
+                        Keep me signed in
+                    </label>
+                </div>
+
+                <a href="#" class="forgot-password">
+                    Forgot password?
+                </a>
 
             </div>
 
-            <!-- SIGNUP -->
-            <div class="signup-link">
-                <p>
-                    New here?
-                    <a href="../register/index.html">
-                        Create an account
-                    </a>
-                </p>
-            </div>
+            <!-- BUTTON -->
+            <button type="submit" class="login-btn btn">
+                <span class="btn-text">Sign In</span>
+            </button>
+
+        </form>
+
+        <!-- DIVIDER -->
+        <div class="divider">
+            <span>or</span>
+        </div>
+
+        <!-- SOCIAL -->
+        <div class="social-login">
+
+            <button type="button" class="social-btn google-btn">
+                Continue with Google
+            </button>
+
+            <button type="button" class="social-btn apple-btn">
+                Continue with Apple
+            </button>
 
         </div>
 
-        <!-- BACKGROUND -->
-        <div class="background-effects">
-            <div class="glow-orb glow-orb-1"></div>
-            <div class="glow-orb glow-orb-2"></div>
-            <div class="glow-orb glow-orb-3"></div>
+        <!-- SIGNUP -->
+        <div class="signup-link">
+            <p>
+                New here?
+                <a href="../register/index.html">
+                    Create an account
+                </a>
+            </p>
         </div>
 
     </div>
 
-    <script>
+    <!-- BACKGROUND -->
+    <div class="background-effects">
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
 
-        // SHOW / HIDE PASSWORD
-        const passwordToggle = document.getElementById("passwordToggle");
-        const passwordInput = document.getElementById("password");
+</div>
 
-        passwordToggle.addEventListener("click", () => {
-
-            if(passwordInput.type === "password"){
-                passwordInput.type = "text";
-                passwordToggle.innerText = "🙈";
-            }else{
-                passwordInput.type = "password";
-                passwordToggle.innerText = "👁";
-            }
-
-        });
-
-        // LOGIN
-        document.getElementById("loginForm").addEventListener("submit", async function(e) {
-
-            e.preventDefault();
-
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-
-            const alertBox = document.getElementById("alertBox");
-
-            if (!email || !password) {
-
-                showAlert("Email dan password wajib diisi");
-                return;
-
-            }
-
-            try {
-
-                const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    },
-
-                    body:
-                    `action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-
-                });
-
-                const data = await res.json();
-
-                if (data.status === "success") {
-
-                    localStorage.setItem("username", data.username);
-
-                    showAlert("Login berhasil!");
-
-                    setTimeout(() => {
-
-                        window.location.href = "../index.html";
-
-                    }, 1000);
-
-                } else {
-
-                    showAlert("Email atau Password salah");
-
-                }
-
-            } catch (error) {
-
-                showAlert("Server error / tidak bisa terhubung");
-
-                console.error(error);
-
-            }
-
-            function showAlert(message) {
-
-                alertBox.innerText = message;
-                alertBox.style.display = "block";
-
-                setTimeout(() => {
-
-                    alertBox.style.display = "none";
-
-                }, 3000);
-
-            }
-
-        });
-
-    </script>
+<script src="login.js"></script>
 
 </body>
 </html>

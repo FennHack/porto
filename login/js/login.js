@@ -1,12 +1,12 @@
 document.getElementById("loginForm").addEventListener("submit", async function(e) {
     e.preventDefault();
 
-    const username = document.getElementById("email").value.trim(); // FIX
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
 
     const alertBox = document.getElementById("alertBox");
 
-    if (!username || !password) {
+    if (!email || !password) {
         showAlert("Email dan password wajib diisi");
         return;
     }
@@ -17,13 +17,15 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: `action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            body: `action=login&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
         });
 
         const data = await res.json();
 
         if (data.status === "success") {
+
             localStorage.setItem("username", data.username);
+
             showAlert("Login berhasil!");
 
             setTimeout(() => {
@@ -31,7 +33,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
             }, 1000);
 
         } else {
-            showAlert("Username atau Password salah");
+            showAlert("Email atau Password salah");
         }
 
     } catch (error) {

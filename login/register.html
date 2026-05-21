@@ -80,7 +80,7 @@
     <script src="script.js"></script>
 
     <script>
-    // ==================== FINAL REGISTER SCRIPT ====================
+    // ==================== SCRIPT REGISTER FINAL & BERSIH ====================
     document.getElementById("registerForm").addEventListener("submit", async function(e) {
         e.preventDefault();
 
@@ -128,7 +128,7 @@
                 messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
                 setTimeout(() => {
                     window.location.href = "index.html";
-                }, 1800);
+                }, 2000);
             } else {
                 messageEl.style.color = "red";
                 messageEl.innerText = data.message || "Gagal registrasi. Coba username lain.";
@@ -150,41 +150,3 @@
         });
     }
     </script>
-</body>
-</html>        messageEl.innerText = "Konfirmasi password tidak cocok!";
-        return;
-    }
-
-    try {
-        const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {   // ← Diubah ke fendra.my.id
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
-        });
-
-        const data = await res.json();
-        console.log("Response:", data);
-
-        if (data.status === "success") {
-            messageEl.style.color = "green";
-            messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
-            setTimeout(() => window.location.href = "index.html", 2000);
-        } else {
-            messageEl.style.color = "red";
-            messageEl.innerText = data.message || "Gagal registrasi. Coba username lain.";
-        }
-    } catch (error) {
-        console.error(error);
-        messageEl.style.color = "red";
-        messageEl.innerText = "Koneksi gagal. Coba lagi.";
-    }
-});
-
-// Password Toggle
-document.getElementById('passwordToggle').addEventListener('click', function() {
-    const pass = document.getElementById('password');
-    pass.type = pass.type === 'password' ? 'text' : 'password';
-});
-</script>

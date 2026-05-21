@@ -1,41 +1,161 @@
-document.getElementById("registerForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Best Price</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-icon">⚡</div>
+                <h2>Create Account</h2>
+                <p>Join us and get the best price</p>
+            </div>
+            
+            <form class="login-form" id="registerForm" novalidate>
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" id="username" name="username" required autocomplete="username">
+                        <label for="username">Username</label>
+                        <span class="input-line"></span>
+                    </div>
+                    <span class="error-message" id="usernameError"></span>
+                </div>
 
-    const username = document.getElementById("username").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const confirmPassword = document.getElementById("confirmPassword").value.trim();
-    const messageEl = document.getElementById("message");
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" required autocomplete="email">
+                        <label for="email">Email</label>
+                        <span class="input-line"></span>
+                    </div>
+                    <span class="error-message" id="emailError"></span>
+                </div>
 
-    messageEl.innerText = "";
-    messageEl.style.color = "";
+                <div class="form-group">
+                    <div class="input-wrapper password-wrapper">
+                        <input type="password" id="password" name="password" required autocomplete="new-password">
+                        <label for="password">Password</label>
+                        <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                            <span class="toggle-icon"></span>
+                        </button>
+                        <span class="input-line"></span>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
 
-    if (!username || !email || !password || !confirmPassword) {
-        messageEl.style.color = "red";
-        messageEl.innerText = "Semua field harus diisi!";
-        return;
-    }
-    if (password.length < 6) {
-        messageEl.style.color = "red";
-        messageEl.innerText = "Password minimal 6 karakter!";
-        return;
-    }
-    if (password !== confirmPassword) {
-        messageEl.style.color = "red";
-        messageEl.innerText = "Konfirmasi password tidak cocok!";
-        return;
-    }
+                <div class="form-group">
+                    <div class="input-wrapper password-wrapper">
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <label for="confirmPassword">Confirm Password</label>
+                        <span class="input-line"></span>
+                    </div>
+                    <span class="error-message" id="confirmError"></span>
+                </div>
 
-    try {
-        console.log("Mengirim data:", {username, email}); // untuk debug
+                <button type="submit" class="login-btn btn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader"></span>
+                    <span class="btn-glow"></span>
+                </button>
+            </form>
 
-        const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
-            },
-            body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            <div class="signup-link">
+                <p>Sudah punya akun? <a href="index.html">Sign In</a></p>
+            </div>
+
+            <div id="message" class="message" style="text-align:center; margin-top:15px; font-weight:500; min-height:20px;"></div>
+        </div>
+        
+        <div class="background-effects">
+            <div class="glow-orb glow-orb-1"></div>
+            <div class="glow-orb glow-orb-2"></div>
+            <div class="glow-orb glow-orb-3"></div>
+        </div>
+    </div>
+
+    <script src="../../shared/js/form-utils.js"></script>
+    <script src="script.js"></script>
+
+    <div id="alertBox" class="alert" style="display:none;"></div>
+
+    <script>
+    // ==================== REGISTER SCRIPT LENGKAP ====================
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const confirmPassword = document.getElementById("confirmPassword").value.trim();
+        const messageEl = document.getElementById("message");
+
+        // Reset pesan
+        messageEl.innerText = "";
+        messageEl.style.color = "";
+
+        // Validasi client-side
+        if (!username || !email || !password || !confirmPassword) {
+            messageEl.style.color = "red";
+            messageEl.innerText = "Semua field harus diisi!";
+            return;
+        }
+
+        if (password.length < 6) {
+            messageEl.style.color = "red";
+            messageEl.innerText = "Password minimal 6 karakter!";
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            messageEl.style.color = "red";
+            messageEl.innerText = "Konfirmasi password tidak cocok!";
+            return;
+        }
+
+        try {
+            const res = await fetch("https://herisusanta.my.id/javalogin/api/auth.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: `action=register&username=\( {encodeURIComponent(username)}&email= \){encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
+            });
+
+            const data = await res.json();
+            console.log("Response API:", data);   // Untuk debugging
+
+            if (data.status === "success") {
+                messageEl.style.color = "green";
+                messageEl.innerText = "Registrasi berhasil! Mengalihkan...";
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2000);
+            } else {
+                messageEl.style.color = "red";
+                messageEl.innerText = data.message || "Gagal registrasi. Coba username lain.";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            messageEl.style.color = "red";
+            messageEl.innerText = "Koneksi bermasalah. Periksa internet Anda.";
+        }
+    });
+
+    // Password Toggle
+    const passwordToggle = document.getElementById('passwordToggle');
+    if (passwordToggle) {
+        passwordToggle.addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
         });
+    }
+    </script>
+</body>
+</html>        });
 
         const data = await res.json();
         console.log("Response dari server:", data);   // ← ini penting

@@ -400,12 +400,9 @@ class LoginForm2 {
         }, 300);
     }
     
-    simulateRedirect() {
-        // For demo, reset the form after 2 seconds
-        setTimeout(() => {
-            this.resetForm();
-        }, 2000);
-    }
+setTimeout(() => {
+    window.location.href = "index.html";
+}, 1000);
     
     showLoginError(message) {
         FormUtils.showNotification(message || 'Login failed. Please try again.', 'error', this.form);

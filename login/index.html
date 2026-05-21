@@ -88,62 +88,22 @@
         </div>
     </div>
 
-<script src="../../shared/js/form-utils.js"></script>
-<script src="script.js"></script>
-<script src="js/login.js"></script>
+    <script src="../../shared/js/form-utils.js"></script>
+    <script src="script.js"></script>
+    <script src="js/login.js"></script>
 
-<div id="alertBox" class="alert" style="display:none;"></div>
+    <div id="alertBox" class="alert" style="display:none;"></div>
 
-<script>
-    // Fix link Create Account
-    document.addEventListener("DOMContentLoaded", function() {
-        const registerLink = document.getElementById("registerLink");
-        if (registerLink) {
-            registerLink.addEventListener("click", function(e) {
-                console.log("Create account diklik → register.html");
-                // window.location.href = "register.html"; // uncomment kalau masih bermasalah
-            });
-        }
-    });
-</script>
-</body>
-</html>                    `&username=${encodeURIComponent(username)}` +
-                    `&password=${encodeURIComponent(password)}`
+    <script>
+        // Fix link Create Account
+        document.addEventListener("DOMContentLoaded", function() {
+            const registerLink = document.getElementById("registerLink");
+            if (registerLink) {
+                registerLink.addEventListener("click", function() {
+                    console.log("Create account diklik");
+                });
             }
-        );
-
-        const text = await response.text();
-
-        console.log(text);
-
-        let data = JSON.parse(text);
-
-        if(data.status === "success"){
-
-            message.style.color = "lime";
-            message.innerText = "Register berhasil!";
-
-        }else{
-
-            message.style.color = "red";
-            message.innerText =
-                data.message || "Register gagal";
-
-        }
-
-    }catch(err){
-
-        console.error(err);
-
-        message.style.color = "red";
-        message.innerText =
-            "Server error / JSON rusak";
-
-    }
-
-});
-
-</script>
-
+        });
+    </script>
 </body>
 </html>
